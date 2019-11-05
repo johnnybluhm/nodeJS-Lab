@@ -12,9 +12,13 @@ div.container
 
         img.card-img-top#player_img(src= image_src, alt="Football Player")
         div.card-body.mx-auto
-          form.form(action="/player_info/post", method="get")
+          form.form(action="/player_info/select_player", method="get")
             select.custom-select(name="player_choice", onchange="this.form.submit()")
               option(selected) Select Player
+              each val in data
+                var id = val.id
+                option#-id=val.name
+             
               //- TODO: Populate the select with player options. Set the value to the player's id and display the player's name.
     div.col-8
       div.table-responsive

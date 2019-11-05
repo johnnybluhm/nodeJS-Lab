@@ -7,8 +7,10 @@ div.container
   div.row
     div.col-4
       div.card
-        //- TODO: Modify the pug code below to conditionally set the image_src
-        - let image_src = '../../resources/img/helmet.jpg'
+      form(action="/player_info", method="get")
+      - var playernum = data[0].id
+        var image_src = "../../resources/img/player"+playernum
+        console.log(data[0].id)
 
         img.card-img-top#player_img(src= image_src, alt="Football Player")
         div.card-body.mx-auto
@@ -18,6 +20,7 @@ div.container
               each val in data
                 var id = val.id
                 option#-id=val.name
+
              
               //- TODO: Populate the select with player options. Set the value to the player's id and display the player's name.
     div.col-8

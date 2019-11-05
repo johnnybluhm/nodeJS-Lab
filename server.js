@@ -80,7 +80,7 @@ app.get('/home', function(req, res) {
         color_msg: ''
       })
 
-            app.get('/home/pick_color', function(req, res) {
+  app.get('/home/pick_color', function(req, res) {
   var color_choice = req.query.color_selection;
   var color_options =  'select * from favorite_colors;';
   var color_message = "select color_msg from favorite_colors where hex_value = '" + color_choice + "';";
@@ -274,6 +274,57 @@ db.any(query)
 
 
 });
+
+
+//select player
+
+app.get('/pages/player_info/post/select_player', function(req, res) {
+  var player_id = req.query.player_choice;
+  var name_id= 'SELECT name, id FROM football_players;';
+  var query2 = 'SELECT * FROM football_players WHERE player_id=player_id';
+
+  
+
+db.task('get-everything', task => {
+    return task.batch([
+        task.any(query1),
+        task.any(query2),
+        task.any(query3)
+
+    ]);
+})
+.then(data => {
+
+
+  console.log(data);
+
+  
+    res.render('pages/player_info',{
+    
+
+  console.log(data);
+
+  })
+
+
+
+})
+.catch(error => {
+    // display error message in case an error
+        request.flash('error', err);
+        res.render('pages/page_name',{
+      my_title: "Page Title Here",
+      result_1: '',
+      result_2: '',
+      result_3: ''
+    })
+});
+
+});
+
+
+
+
 
 
 

@@ -276,11 +276,9 @@ db.any(query)
 
 //select player how to I insert a variable into a string in javasscrip, where player id = var player id
 
-<<<<<<< HEAD
-app.get('/player_info/select_player', function(req, res) {
-=======
+
 app.get('/pages/player_info/select_player', function(req, res) {
->>>>>>> ba41adc40ec6de84de7a28843635d694727f51e5
+
   var player_id = req.query.player_choice;
   var name_id= 'SELECT name, id FROM football_players;';
  // var query2 = "SELECT * FROM football_players WHERE '" + player_id + '"=player_id"' +"';";
@@ -306,11 +304,7 @@ db.task('get-everything', task => {
     res.render('pages/player_info',{
     
 
-<<<<<<< HEAD
- // console.log(data);
-=======
-  
->>>>>>> ba41adc40ec6de84de7a28843635d694727f51e5
+
 
   })
 

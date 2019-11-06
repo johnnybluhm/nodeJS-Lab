@@ -19,8 +19,15 @@ div.container
               option(selected) Select Player
 
               for val in data
+
                 var id = val.id// option#(val.id)
                 option(val=val.id)#
+
+                var id = val.id// option#-id=val.name
+                option(val=val.id)#(val.name)
+
+              
+
 
              
 

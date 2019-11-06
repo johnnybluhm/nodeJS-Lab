@@ -277,6 +277,11 @@ db.any(query)
 //select player how to I insert a variable into a string in javasscrip, where player id = var player id
 
 
+<<<<<<< HEAD
+=======
+app.get('/player_info/select_player', function(req, res) {
+
+>>>>>>> 5cfb95c586dbf9787de4651508ce46d2b40062d1
 app.get('/pages/player_info/select_player', function(req, res) {
 
   var player_id = req.query.player_choice;

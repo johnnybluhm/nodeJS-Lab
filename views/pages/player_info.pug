@@ -15,10 +15,9 @@ div.container
           form.form(action="/player_info/select_player", method="get")
             select.custom-select(name="player_choice", onchange="this.form.submit()")
               option(selected) Select Player
-              each val in data
-                var id = val.id
-                option#-id=val.name
-             
+              for val in data
+                var id = val.id// option#-id=val.name
+                option(val=val.id)#(val.name)
               //- TODO: Populate the select with player options. Set the value to the player's id and display the player's name.
     div.col-8
       div.table-responsive

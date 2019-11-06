@@ -270,26 +270,28 @@ db.any(query)
       my_title: "My Title Here",
       data: '',
     })
-  })
+  });
 
 
 });
 
 
-//select player
+//select player how to I insert a variable into a string in javasscrip, where player id = var player id
 
-app.get('/pages/player_info/post/select_player', function(req, res) {
+app.get('/player_info/select_player', function(req, res) {
   var player_id = req.query.player_choice;
   var name_id= 'SELECT name, id FROM football_players;';
-  var query2 = 'SELECT * FROM football_players WHERE player_id=player_id';
-
+ // var query2 = "SELECT * FROM football_players WHERE '" + player_id + '"=player_id"' +"';";
+  var query2 = 'SELECT * FROM football_players WHERE player_id =${player_id};';
   
 
 db.task('get-everything', task => {
     return task.batch([
-        task.any(query1),
-        task.any(query2),
-        task.any(query3)
+        //task.any(query1),
+       // task.any(query2),
+       // task.any(query3)
+       task.any(name_id),
+       task.any(query2)
 
     ]);
 })
@@ -302,7 +304,7 @@ db.task('get-everything', task => {
     res.render('pages/player_info',{
     
 
-  console.log(data);
+ // console.log(data);
 
   })
 
@@ -311,9 +313,10 @@ db.task('get-everything', task => {
 })
 .catch(error => {
     // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/page_name',{
-      my_title: "Page Title Here",
+       // request.flash('error', err);
+      console.log(error);
+      res.render('pages/player_info',{
+      my_title: "burge",
       result_1: '',
       result_2: '',
       result_3: ''

@@ -7,27 +7,18 @@ div.container
   div.row
     div.col-4
       div.card
-      form(action="/player_info", method="get")
-      - var playernum = data[0].id
-        var image_src = "../../resources/img/player"+playernum
-        console.log(data[0].id)
+        //- TODO: Modify the pug code below to conditionally set the image_src
+        - let image_src = '../../resources/img/helmet.jpg'
 
         img.card-img-top#player_img(src= image_src, alt="Football Player")
         div.card-body.mx-auto
           form.form(action="/player_info/select_player", method="get")
             select.custom-select(name="player_choice", onchange="this.form.submit()")
               option(selected) Select Player
-<<<<<<< HEAD
-              for val in data
-                var id = val.id// option#-id=val.name
-                option(val=val.id)#(val.name)
-=======
               each val in data
                 var id = val.id
                 option#-id=val.name
-
              
->>>>>>> ba41adc40ec6de84de7a28843635d694727f51e5
               //- TODO: Populate the select with player options. Set the value to the player's id and display the player's name.
     div.col-8
       div.table-responsive

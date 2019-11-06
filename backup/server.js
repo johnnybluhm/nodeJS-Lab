@@ -219,6 +219,10 @@ db.task('get-everything', task => {
     ]);
 })
 .then(data => {
+
+
+
+
   
     res.render('pages/team_stats',{
     football:data[0],
@@ -255,10 +259,8 @@ db.any(query)
     .then(function (rows) {
         res.render('pages/player_info',{
       my_title: "Player information",
-      data: rows
+      data: rows,
     })
-       
-        
 
     })
     .catch(function (err) {
@@ -266,7 +268,7 @@ db.any(query)
         request.flash('error', err);
         res.render('pages/page_name',{
       my_title: "My Title Here",
-      data: ''
+      data: '',
     })
   });
 
@@ -276,24 +278,18 @@ db.any(query)
 
 //select player how to I insert a variable into a string in javasscrip, where player id = var player id
 
-<<<<<<< HEAD
 app.get('/player_info/select_player', function(req, res) {
-=======
-app.get('/pages/player_info/select_player', function(req, res) {
->>>>>>> ba41adc40ec6de84de7a28843635d694727f51e5
   var player_id = req.query.player_choice;
   var name_id= 'SELECT name, id FROM football_players;';
- // var query2 = "SELECT * FROM football_players WHERE '" + player_id + '"=player_id"' +"';";
-  var query2 = 'SELECT * FROM football_players WHERE player_id =${player_id};';
+  var query2 = 'SELECT * FROM football_players WHERE player_id=player_id';
+
   
 
 db.task('get-everything', task => {
     return task.batch([
-        //task.any(query1),
-       // task.any(query2),
-       // task.any(query3)
-       task.any(name_id),
-       task.any(query2)
+        task.any(query1),
+        task.any(query2),
+        task.any(query3)
 
     ]);
 })
@@ -306,11 +302,7 @@ db.task('get-everything', task => {
     res.render('pages/player_info',{
     
 
-<<<<<<< HEAD
  // console.log(data);
-=======
-  
->>>>>>> ba41adc40ec6de84de7a28843635d694727f51e5
 
   })
 
@@ -320,9 +312,9 @@ db.task('get-everything', task => {
 .catch(error => {
     // display error message in case an error
        // request.flash('error', err);
-      console.log(error);
-      res.render('pages/player_info',{
-      my_title: "burge",
+       console.log(error);
+        res.render('pages/page_name',{
+      my_title: "Page Title Here",
       result_1: '',
       result_2: '',
       result_3: ''

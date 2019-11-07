@@ -302,11 +302,11 @@ console.log(data[0]);
 app.get('/player_info/select_player', function(req, res) {
 
   var player_id = req.query.player_choice;
-  var player_num = 'SELECT id FROM football_players where name=\''+player_id+'\';';
   var name_id= 'SELECT name, id FROM football_players;';
  // var query2 = "SELECT * FROM football_players WHERE '" + player_id + '"=player_id"' +"';";
-  var query2 = 'SELECT * FROM football_players WHERE player_id =${player_id};';
-  var test = 'select * from football_players;'
+  var query2 = 'SELECT * FROM football_players WHERE id ='+player_id+';';
+  var games_played = 'SELECT COUNT(*) FROM football_games WHERE '+player_id+'= ANY(players);';
+
 
 db.task('get-everything', task => {
     return task.batch([
@@ -314,27 +314,37 @@ db.task('get-everything', task => {
        // task.any(query2),
        // task.any(query3)
        task.any(name_id),
-       task.any(player_num)
+       task.any(query2),
+       task.any(games_played)
 
     ]);
 })
 .then(data => {
 
+  var total=data[2][0].count;
+  var avgp= data[1][0].passing_yards/total;
+    var avgr= data[1][0].rushing_yards/total;
+      var avgrec= data[1][0].receiving_yards/total;
 
+    var avg = {pass:avgp, rush:avgr, rec:avgrec};
 
 
   
     res.render('pages/player_info',{
     
       my_title: "Player information",
-      stats: data[0],
-      player: player_id
+      data: data[0],
+      player: player_id,
+      stats: data[1][0],
+      games: total,
+      avg : avg
+
 
 
 
   })
 
-     console.log(player_id);
+     console.log(avg);
 
 
 

@@ -344,7 +344,7 @@ db.task('get-everything', task => {
 
   })
 
-     console.log(avg);
+
 
 
 

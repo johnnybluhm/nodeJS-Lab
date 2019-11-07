@@ -235,7 +235,7 @@ db.task('get-everything', task => {
 .catch(error => {
     // display error message in case an error
         request.flash('error', err);
-        res.render('pages/page_name',{
+        res.render('pages/team_stats',{
       my_title: "Page Title Here",
       result_1: '',
       result_2: '',
@@ -251,24 +251,45 @@ app.get('/player_info', function(req, res) {
   var query = 'SELECT name, id FROM football_players;';
 
 
-db.any(query)
-    .then(function (rows) {
-        res.render('pages/player_info',{
-      my_title: "Player information",
-      data: rows
-    })
-       
-        
+db.task('get-everything', task => {
+    return task.batch([
+        //task.any(query1),
+       // task.any(query2),
+       // task.any(query3)
+       task.any(query)
 
+    ]);
+})
+.then(data => {
+
+
+ 
+
+  
+    res.render('pages/player_info',{
+    
+      my_title: "Player information",
+      data: data[0]
+
+
+
+  })
+console.log(data[0]);
+
+
+
+})
+.catch(error => {
+    // display error message in case an error
+       // request.flash('error', err);
+      console.log(error);
+      res.render('pages/player_info',{
+      my_title: "burge",
+      result_1: '',
+      result_2: '',
+      result_3: ''
     })
-    .catch(function (err) {
-        // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/page_name',{
-      my_title: "My Title Here",
-      data: ''
-    })
-  });
+});
 
 
 });
@@ -281,10 +302,11 @@ db.any(query)
 app.get('/player_info/select_player', function(req, res) {
 
   var player_id = req.query.player_choice;
+  var player_num = 'SELECT id FROM football_players where name=\''+player_id+'\';';
   var name_id= 'SELECT name, id FROM football_players;';
  // var query2 = "SELECT * FROM football_players WHERE '" + player_id + '"=player_id"' +"';";
   var query2 = 'SELECT * FROM football_players WHERE player_id =${player_id};';
-  
+  var test = 'select * from football_players;'
 
 db.task('get-everything', task => {
     return task.batch([
@@ -292,22 +314,29 @@ db.task('get-everything', task => {
        // task.any(query2),
        // task.any(query3)
        task.any(name_id),
-       task.any(query2)
+       task.any(player_num)
 
     ]);
 })
 .then(data => {
 
 
-  console.log(data);
+
 
   
     res.render('pages/player_info',{
     
+      my_title: "Player information",
+      stats: data[0],
+      player: player_id
 
 
 
   })
+
+     console.log(player_id);
+
+
 
 
 

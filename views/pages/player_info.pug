@@ -7,24 +7,25 @@ div.container
   div.row
     div.col-4
       div.card
-      form(action="/player_info", method="get")
-      - var playernum = data[0].id
-        var image_src = "../../resources/img/player"+playernum
-        console.log(data[0].id)
+        - var image_src = "../../resources/img/helmet.jpg"
+        if(stats)
+          - var playernum = player
+          - image_src = "../../resources/img/player"+playernum+".jpg"
+        
 
         img.card-img-top#player_img(src= image_src, alt="Football Player")
         div.card-body.mx-auto
           form.form(action="/player_info/select_player", method="get")
             select.custom-select(name="player_choice", onchange="this.form.submit()")
               option(selected) Select Player
+              if(data)
+                each val in data
 
-              for val in data
+                
+                  option(value=val.id)=val.name
 
-                var id = val.id// option#(val.id)
-                option(val=val.id)#
-
-                var id = val.id// option#-id=val.name
-                option(val=val.id)#(val.name)
+                // var id = val.id// option#-id=val.name
+                // option(val=val.id)#(val.name)
 
               
 
